@@ -1,0 +1,5 @@
+*.docx
+*~*
+creating_conda_packages.txt
+glfw3.dll
+notes.txt
