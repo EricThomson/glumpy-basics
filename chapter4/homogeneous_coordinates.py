@@ -26,7 +26,7 @@ plt.grid(linestyle = '-', color ="#E9E9E9", zorder = 0)
 plt.xlabel('x')
 plt.ylabel('y');
 ax.axis('square')
-ax.axis((-1.5, 1.5, -1.5, 1.5))
+ax.axis((-2.5, 2.5, -2.5, 2.5))
 
 
 #%% Rotation counterclockwise
@@ -53,9 +53,25 @@ ax.fill(scale_x_cart, scale_y_cart, 'r', alpha = 0.3, zorder = 3)
 ax.plot(scale_x_cart, scale_y_cart, c = 'r', alpha = 0.8, zorder = 3)
 
 #%% Translate
+x_trans = 1;
+y_trans = -2;
+translation_mat = np.array([[1,  0, x_trans],
+                            [0,  1, y_trans],
+                            [0,  0,    1]]);
+pts_translated = translation_mat.dot(pts);
+translated_x_cart = pts_translated[0,:]/pts_scaled[2,:]
+translated_y_cart = pts_translated[1,:]/pts_scaled[2,:]
+ax.fill(translated_x_cart, translated_y_cart, 'g', alpha = 0.3, zorder = 3)
+ax.plot(scale_x_cart, scale_y_cart, c = 'g', alpha = 0.8, zorder = 3)
 
 
-
+#%% Arbitrary combinations of stuff
+sc_ro_tr = translation_mat.dot(scale_mat.dot(rot_mat))
+pts_sc_ro_tr = sc_ro_tr.dot(pts)
+sc_ro_tr_x_cart = pts_sc_ro_tr[0,:]/pts_sc_ro_tr[2,:]
+sc_ro_tr_y_cart = pts_sc_ro_tr[1,:]/pts_sc_ro_tr[2,:]
+ax.fill(sc_ro_tr_x_cart, sc_ro_tr_y_cart, 'g', alpha = 0.3, zorder = 3)
+ax.plot(sc_ro_tr_x_cart, sc_ro_tr_y_cart,  c = 'g', alpha = 0.8, zorder = 3)
 
 
 
